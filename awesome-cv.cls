@@ -86,6 +86,7 @@
   pdfkeywords={}
 }
 
+\RequirePackage{tabularx}
 
 %-------------------------------------------------------------------------------
 %                Configuration for directory locations
@@ -277,6 +278,9 @@
 % Define writer's address
 % Usage: \address{<address>}
 \newcommand*{\address}[1]{\def\@address{#1}}
+\newcommand*{\addresslineone}[1]{\def\@addresslineone{#1}}
+\newcommand*{\addresslinetwo}[1]{\def\@addresslinetwo{#1}}
+\newcommand*{\addresslinethree}[1]{\def\@addresslinethree{#1}}
 
 % Define writer's position
 % Usage: \name{<position>}
@@ -372,8 +376,9 @@
 %% Define helper macros a user can change easily
 % Header
 \newcommand{\acvHeaderNameDelim}{\space}
-\newcommand{\acvHeaderAfterNameSkip}{.4mm}
+\newcommand{\acvHeaderAfterNameSkip}{1mm}
 \newcommand{\acvHeaderAfterPositionSkip}{.4mm}
+\newcommand{\acvHeaderAfterPositionSkipEdit}{1.5mm}
 \newcommand{\acvHeaderAfterAddressSkip}{-.5mm}
 \newcommand{\acvHeaderIconSep}{\space}
 \newcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
@@ -405,85 +410,100 @@
 %-------------------------------------------------------------------------------
 % Define a header for CV
 % Usage: \makecvheader
+%\newcommand*{\makecvheader}{%
+%  \begin{center}
+%    \headerfirstnamestyle{\@firstname}\headerlastnamestyle{{}\acvHeaderNameDelim\@lastname}%
+%    \\[\acvHeaderAfterNameSkip]%
+%    \ifthenelse{\isundefined{\@position}}{}{\headerpositionstyle{\@position\\[\acvHeaderAfterPositionSkip]}}%
+%    \ifthenelse{\isundefined{\@address}}{}{\headeraddressstyle{\@address\\[\acvHeaderAfterAddressSkip]}}%
+%    \headersocialstyle{%
+%      \newbool{isstart}%
+%      \setbool{isstart}{true}%
+%      \ifthenelse{\isundefined{\@mobile}}%
+%        {}%
+%        {%
+%          \faMobile\acvHeaderIconSep\@mobile%
+%          \setbool{isstart}{false}%
+%        }%
+%      \ifthenelse{\isundefined{\@email}}%
+%        {}%
+%        {%
+%          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+%          \href{mailto:\@email}{\faEnvelope\acvHeaderIconSep\@email}%
+%        }%
+%      \ifthenelse{\isundefined{\@homepage}}%
+%        {}%
+%        {%
+%          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+%          \href{http://\@homepage}{\faHome\acvHeaderIconSep\@homepage}%
+%        }%
+%      \ifthenelse{\isundefined{\@github}}%
+%        {}%
+%        {%
+%          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+%          \href{https://github.com/\@github}{\faGithubSquare\acvHeaderIconSep\@github}%
+%        }%
+%      \ifthenelse{\isundefined{\@stackoverflowid}}%
+%        {}%
+%        {%
+%          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+%          \href{https://stackoverflow.com/users/\@stackoverflowid}{\faStackOverflow\acvHeaderIconSep\@stackoverflowname}%
+%        }%
+%      \ifthenelse{\isundefined{\@linkedin}}%
+%        {}%
+%        {%
+%          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+%          \href{https://www.linkedin.com/in/\@linkedin}{\faLinkedinSquare\acvHeaderIconSep\@linkedin}%
+%        }%
+%      \ifthenelse{\isundefined{\@twitter}}%
+%        {}%
+%        {%
+%          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+%          \href{https://twitter.com/\@twitter}{\faTwitter\acvHeaderIconSep\@twitter}%
+%        }%
+%      \ifthenelse{\isundefined{\@skype}}%
+%        {}%
+%        {%
+%          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+%          \faSkype\acvHeaderIconSep\@skype%
+%        }%
+%      \ifthenelse{\isundefined{\@reddit}}%
+%        {}%
+%        {%
+%          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+%          \href{https://www.reddit.com/user/\@reddit}{\faReddit\acvHeaderIconSep\@reddit}%
+%        }%
+%      \ifthenelse{\isundefined{\@xing}}%
+%        {}%
+%        {%
+%          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+%          \href{https://www.xing.com/profile/\@xing}{\faXingSquare\acvHeaderIconSep\@xing}
+%        }%
+%      \ifthenelse{\isundefined{\@extrainfo}}%
+%        {}%
+%        {%
+%          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+%          \@extrainfo%
+%        }%
+%    } \\[\acvHeaderAfterSocialSkip]%
+%    \ifthenelse{\isundefined{\@quote}}%
+%      {}%
+%      {\headerquotestyle{\@quote\\}\vspace{\acvHeaderAfterQuoteSkip}}%
+%  \end{center}%
+%}
 \newcommand*{\makecvheader}{%
   \begin{center}
+  
     \headerfirstnamestyle{\@firstname}\headerlastnamestyle{{}\acvHeaderNameDelim\@lastname}%
     \\[\acvHeaderAfterNameSkip]%
-    \ifthenelse{\isundefined{\@position}}{}{\headerpositionstyle{\@position\\[\acvHeaderAfterPositionSkip]}}%
-    \ifthenelse{\isundefined{\@address}}{}{\headeraddressstyle{\@address\\[\acvHeaderAfterAddressSkip]}}%
-    \headersocialstyle{%
-      \newbool{isstart}%
-      \setbool{isstart}{true}%
-      \ifthenelse{\isundefined{\@mobile}}%
-        {}%
-        {%
-          \faMobile\acvHeaderIconSep\@mobile%
-          \setbool{isstart}{false}%
-        }%
-      \ifthenelse{\isundefined{\@email}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{mailto:\@email}{\faEnvelope\acvHeaderIconSep\@email}%
-        }%
-      \ifthenelse{\isundefined{\@homepage}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{http://\@homepage}{\faHome\acvHeaderIconSep\@homepage}%
-        }%
-      \ifthenelse{\isundefined{\@github}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://github.com/\@github}{\faGithubSquare\acvHeaderIconSep\@github}%
-        }%
-      \ifthenelse{\isundefined{\@stackoverflowid}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://stackoverflow.com/users/\@stackoverflowid}{\faStackOverflow\acvHeaderIconSep\@stackoverflowname}%
-        }%
-      \ifthenelse{\isundefined{\@linkedin}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://www.linkedin.com/in/\@linkedin}{\faLinkedinSquare\acvHeaderIconSep\@linkedin}%
-        }%
-      \ifthenelse{\isundefined{\@twitter}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://twitter.com/\@twitter}{\faTwitter\acvHeaderIconSep\@twitter}%
-        }%
-      \ifthenelse{\isundefined{\@skype}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \faSkype\acvHeaderIconSep\@skype%
-        }%
-      \ifthenelse{\isundefined{\@reddit}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://www.reddit.com/user/\@reddit}{\faReddit\acvHeaderIconSep\@reddit}%
-        }%
-      \ifthenelse{\isundefined{\@xing}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://www.xing.com/profile/\@xing}{\faXingSquare\acvHeaderIconSep\@xing}
-        }%
-      \ifthenelse{\isundefined{\@extrainfo}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \@extrainfo%
-        }%
-    } \\[\acvHeaderAfterSocialSkip]%
-    \ifthenelse{\isundefined{\@quote}}%
-      {}%
-      {\headerquotestyle{\@quote\\}\vspace{\acvHeaderAfterQuoteSkip}}%
+    \ifthenelse{\isundefined{\@position}}{}{\headerpositionstyle{\@position\\[\acvHeaderAfterPositionSkipEdit]}}%
+    
+    \begin{tabular}{r|l}
+    \headersocialstyle{\href{mailto:\@email}{\faEnvelope\acvHeaderIconSep\@email}} & \headeraddressstyle{\@addresslineone} \\
+      \headersocialstyle{\faMobile\acvHeaderIconSep\@mobile} & \headeraddressstyle{\@addresslinetwo} \\
+       & \headeraddressstyle{\@addresslinethree} \\
+    \end{tabular}
+      
   \end{center}%
 }
 
@@ -577,16 +597,22 @@
   \begin{center}
     \setlength\tabcolsep{0pt}
     \setlength{\extrarowheight}{0pt}
-    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} C{1.5cm} L{\textwidth - 4.0cm} R{2.5cm}}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth * \real{0.12}} L{\textwidth - \textwidth * \real{0.12} - 2.5cm} R{2.5cm}}
 }{%
     \end{tabular*}
   \end{center}
 }
+%% Define a line of cv information(honor, award or something else)
+%% Usage: \cvhonor{<position>}{<title>}{<location>}{<date>}
+%\newcommand*{\cvhonor}[4]{%
+%  \honordatestyle{#4} & \honorpositionstyle{#1}, \honortitlestyle{#2} & \honorlocationstyle{#3} \\
+%}
 % Define a line of cv information(honor, award or something else)
 % Usage: \cvhonor{<position>}{<title>}{<location>}{<date>}
 \newcommand*{\cvhonor}[4]{%
-  \honordatestyle{#4} & \honorpositionstyle{#1}, \honortitlestyle{#2} & \honorlocationstyle{#3} \\
+  \honordatestyle{#4} & \honortitlestyle{#2} & \honorlocationstyle{#3} \\
 }
+
 
 % Define an environment for cvskill
 \newenvironment{cvskills}{%
@@ -595,7 +621,7 @@
   \begin{center}
     \setlength\tabcolsep{1ex}
     \setlength{\extrarowheight}{0pt}
-    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} r L{\textwidth * \real{0.9}}}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} >{\raggedleft}p{\textwidth * \real{0.12}} p{\textwidth * \real{0.84}}}
 }{%
     \end{tabular*}
   \end{center}
