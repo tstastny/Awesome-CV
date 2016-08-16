@@ -47,7 +47,7 @@
 %                3rd party packages
 %-------------------------------------------------------------------------------
 % Needed to make fixed length table
-\RequirePackage{array}
+\RequirePackage{tabularx}
 % Needed to handle list environment
 \RequirePackage{enumitem}
 % Needed to handle text alignment
@@ -85,8 +85,9 @@
   pdfsubject={},
   pdfkeywords={}
 }
-
-\RequirePackage{tabularx}
+\RequirePackage{graphicx}
+\RequirePackage{multicol}
+\RequirePackage{units}
 
 %-------------------------------------------------------------------------------
 %                Configuration for directory locations
@@ -232,6 +233,8 @@
 \newcommand*{\entrydatestyle}[1]{{\fontsize{8pt}{1em}\bodyfontlight\slshape\color{graytext} #1}}
 \newcommand*{\entrylocationstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
 \newcommand*{\descriptionstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\upshape\color{text} #1}}
+\newcommand*{\highlightdescriptionstyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\upshape\color{awesome} #1}}
+\newcommand*{\emphdescriptionstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\upshape\bfseries\color{graytext} #1}}
 
 % For elements of subentry
 \newcommand*{\subentrytitlestyle}[1]{{\fontsize{8pt}{1em}\bodyfont\mdseries\color{graytext} #1}}
@@ -565,6 +568,24 @@
     \multicolumn{2}{L{\textwidth}}{\descriptionstyle{#5}}
   \end{tabular*}%
 }
+% Define a project entry of cv information
+% Usage: \cvprojentry{<position>}{<title>}{<location>}{<date>}{<milestones>}{<role>}
+\newcommand*{\cvprojentry}[7]{%
+  \vspace{-2.0mm}
+  \setlength\tabcolsep{0pt}
+  \setlength{\extrarowheight}{0pt}
+  	\begin{flushleft}
+    \entrytitlestyle{#2} \entrydatestyle{(}\entrydatestyle{#4}\entrydatestyle{)}\\
+    \entrypositionstyle{#1}
+    \end{flushleft}
+    \vspace{-1.0mm}
+    \begin{justify}
+    \highlightdescriptionstyle{Milestones:} \descriptionstyle{#5} \highlightdescriptionstyle{Role:} \descriptionstyle{#6} \ifempty{#7}{}{\headersocialstyle{\href{#7}{\faExternalLink\acvHeaderIconSep #7}}}
+    \end{justify}
+    \vspace{3.0mm}
+    \hrule
+    \vspace{\acvSectionContentTopSkip}
+}
 
 % Define an environment for cvsubentry
 \newenvironment{cvsubentries}{%
@@ -618,18 +639,18 @@
 \newenvironment{cvskills}{%
   \vspace{\acvSectionContentTopSkip}
   \vspace{-2.0mm}
-  \begin{center}
     \setlength\tabcolsep{1ex}
-    \setlength{\extrarowheight}{0pt}
-    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} >{\raggedleft}p{\textwidth * \real{0.12}} p{\textwidth * \real{0.84}}}
+    \setlength{\extrarowheight}{4pt}
+    \tabularx{\textwidth}{r>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}X}
 }{%
-    \end{tabular*}
-  \end{center}
+    \endtabularx
+    
+    \vspace{2mm}
 }
 % Define a line of cv information(skill)
 % Usage: \cvskill{<type>}{<skillset>}
 \newcommand*{\cvskill}[2]{%
-	\skilltypestyle{#1} & \skillsetstyle{#2} \\
+	\skilltypestyle{#1} & \leavevmode\skillsetstyle{#2} \\
 }
 
 % Define an environment for cvitems(for cventry)
@@ -645,6 +666,15 @@
   \vspace{-4.0mm}
 }
 
+%% Define an environment for cvprojitem(for cventry)
+%\newenvironment{cvprojitem}{%
+%  \vspace{-4.0mm}
+%  \begin{justify}
+%    \setlength{\parskip}{0pt}
+%}{%
+%  \end{justify}
+%  \vspace{-4.0mm}
+%}
 
 %-------------------------------------------------------------------------------
 %                Commands for elements of Cover Letter
