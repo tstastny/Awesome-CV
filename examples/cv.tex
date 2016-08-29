@@ -18,7 +18,7 @@
 % CONFIGURATIONS
 %-------------------------------------------------------------------------------
 % A4 paper size by default, use 'letterpaper' for US letter
-	\documentclass[11pt, a4paper]{awesome-cv}
+\documentclass[11pt, a4paper]{awesome-cv}
 
 % Configure page margins with geometry
 \geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}
@@ -54,8 +54,8 @@
 \name{Thomas J.}{Stastny}
 \position{Ph.D Candidate{\enskip\cdotp\enskip}Research Assistant}
 \address{Autonomous Systems Lab, ETH Zürich, LEE J 314, Leonhardstrasse 21, 8092 Zürich, Switzerland}
-\addresslineone{Autonomous Systems Lab}
-\addresslinetwo{ETH Zürich, LEE J 314, Leonhardstrasse 21}
+\addresslineone{Autonomous Systems Lab, ETH Zürich}
+\addresslinetwo{Leonhardstrasse 21, LEE J 314}
 \addresslinethree{8092 Zürich, Switzerland}
 %
 \mobile{(+41) 79 883 7765}
@@ -89,17 +89,49 @@
 %	CV/RESUME CONTENT
 %	Each section is imported separately, open each file in turn to modify content
 %-------------------------------------------------------------------------------
+\begin{minipage}[t]{0.32\textwidth}
+\noindent\fcolorbox{white}{lightergray}{
+\begin{minipage}[t]{\textwidth}
 \input{cv/education.tex}
+\end{minipage}
+}
 
-\input{cv/positions.tex}
-\input{cv/projects.tex}
-\input{cv/publications.tex}
-%\input{cv/extracurricular.tex}
+\vspace{\acvSectionTopSkip}
+%\noindent\fcolorbox{white}{white}{
+%\begin{minipage}[t]{\textwidth}
 \input{cv/skills.tex}
+\vspace{\acvSectionTopSkip}
 \input{cv/honors.tex}
-%\input{cv/presentation.tex}
-%\input{cv/writing.tex}
-%\input{cv/committees.tex}
+\vspace{\acvSectionTopSkip}
+%\end{minipage}
+%}
+\end{minipage}%
+\hfill
+\noindent
+\begin{minipage}[t]{0.65\textwidth}
+%\noindent\fcolorbox{white}{white}{
+%\begin{minipage}[t]{\textwidth}
+\input{cv/positions.tex}
+\vspace{\acvSectionTopSkip}
+%\end{minipage}
+%}
+\noindent\fcolorbox{lightergray}{white}{
+\begin{minipage}[t]{\textwidth}
+\input{cv/projects.tex}
+\vspace{\acvSectionTopSkip}
+\end{minipage}
+}
+\end{minipage}%
+
+\vspace{-1mm}
+%\noindent\fcolorbox{white}{white}{
+%\begin{minipage}[t]{\textwidth}
+\input{cv/publications.tex}
+%\end{minipage}
+%}
+\vspace{1.5mm}
+\raggedleft
+References available upon request.
 
 
 %-------------------------------------------------------------------------------

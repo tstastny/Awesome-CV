@@ -88,6 +88,8 @@
 \RequirePackage{graphicx}
 \RequirePackage{multicol}
 \RequirePackage{units}
+\RequirePackage{vwcol}  
+\RequirePackage{pbox}
 
 %-------------------------------------------------------------------------------
 %                Configuration for directory locations
@@ -124,6 +126,7 @@
 \definecolor{darkgray}{HTML}{333333}
 \definecolor{gray}{HTML}{5D5D5D}
 \definecolor{lightgray}{HTML}{999999}
+\definecolor{lightergray}{HTML}{EEEEEE}
 % Basic colors
 \definecolor{green}{HTML}{C2E15F}
 \definecolor{orange}{HTML}{FDA333}
@@ -216,9 +219,9 @@
 %-------------------------------------------------------------------------------
 % Configure styles for each CV elements
 % For fundamental structures
-\newcommand*{\headerfirstnamestyle}[1]{{\fontsize{32pt}{1em}\headerfontlight\color{graytext} #1}}
-\newcommand*{\headerlastnamestyle}[1]{{\fontsize{32pt}{1em}\headerfont\bfseries\color{text} #1}}
-\newcommand*{\headerpositionstyle}[1]{{\fontsize{7.6pt}{1em}\bodyfont\scshape\color{awesome} #1}}
+\newcommand*{\headerfirstnamestyle}[1]{{\fontsize{36pt}{1em}\headerfontlight\color{graytext} #1}}
+\newcommand*{\headerlastnamestyle}[1]{{\fontsize{36pt}{1em}\headerfont\bfseries\color{text} #1}}
+\newcommand*{\headerpositionstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\scshape\color{awesome} #1}}
 \newcommand*{\headeraddressstyle}[1]{{\fontsize{8pt}{1em}\headerfont\itshape\color{lighttext} #1}}
 \newcommand*{\headersocialstyle}[1]{{\fontsize{6.8pt}{1em}\headerfont\color{text} #1}}
 \newcommand*{\headerquotestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\itshape\color{darktext} #1}}
@@ -400,6 +403,7 @@
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{J}[1]{>{\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
 % Use to draw horizontal line with specific thickness
 \def\vhrulefill#1{\leavevmode\leaders\hrule\@height#1\hfill \kern\z@}
@@ -412,102 +416,28 @@
 %                Commands for elements of CV structure
 %-------------------------------------------------------------------------------
 % Define a header for CV
-% Usage: \makecvheader
-%\newcommand*{\makecvheader}{%
-%  \begin{center}
-%    \headerfirstnamestyle{\@firstname}\headerlastnamestyle{{}\acvHeaderNameDelim\@lastname}%
-%    \\[\acvHeaderAfterNameSkip]%
-%    \ifthenelse{\isundefined{\@position}}{}{\headerpositionstyle{\@position\\[\acvHeaderAfterPositionSkip]}}%
-%    \ifthenelse{\isundefined{\@address}}{}{\headeraddressstyle{\@address\\[\acvHeaderAfterAddressSkip]}}%
-%    \headersocialstyle{%
-%      \newbool{isstart}%
-%      \setbool{isstart}{true}%
-%      \ifthenelse{\isundefined{\@mobile}}%
-%        {}%
-%        {%
-%          \faMobile\acvHeaderIconSep\@mobile%
-%          \setbool{isstart}{false}%
-%        }%
-%      \ifthenelse{\isundefined{\@email}}%
-%        {}%
-%        {%
-%          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-%          \href{mailto:\@email}{\faEnvelope\acvHeaderIconSep\@email}%
-%        }%
-%      \ifthenelse{\isundefined{\@homepage}}%
-%        {}%
-%        {%
-%          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-%          \href{http://\@homepage}{\faHome\acvHeaderIconSep\@homepage}%
-%        }%
-%      \ifthenelse{\isundefined{\@github}}%
-%        {}%
-%        {%
-%          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-%          \href{https://github.com/\@github}{\faGithubSquare\acvHeaderIconSep\@github}%
-%        }%
-%      \ifthenelse{\isundefined{\@stackoverflowid}}%
-%        {}%
-%        {%
-%          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-%          \href{https://stackoverflow.com/users/\@stackoverflowid}{\faStackOverflow\acvHeaderIconSep\@stackoverflowname}%
-%        }%
-%      \ifthenelse{\isundefined{\@linkedin}}%
-%        {}%
-%        {%
-%          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-%          \href{https://www.linkedin.com/in/\@linkedin}{\faLinkedinSquare\acvHeaderIconSep\@linkedin}%
-%        }%
-%      \ifthenelse{\isundefined{\@twitter}}%
-%        {}%
-%        {%
-%          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-%          \href{https://twitter.com/\@twitter}{\faTwitter\acvHeaderIconSep\@twitter}%
-%        }%
-%      \ifthenelse{\isundefined{\@skype}}%
-%        {}%
-%        {%
-%          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-%          \faSkype\acvHeaderIconSep\@skype%
-%        }%
-%      \ifthenelse{\isundefined{\@reddit}}%
-%        {}%
-%        {%
-%          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-%          \href{https://www.reddit.com/user/\@reddit}{\faReddit\acvHeaderIconSep\@reddit}%
-%        }%
-%      \ifthenelse{\isundefined{\@xing}}%
-%        {}%
-%        {%
-%          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-%          \href{https://www.xing.com/profile/\@xing}{\faXingSquare\acvHeaderIconSep\@xing}
-%        }%
-%      \ifthenelse{\isundefined{\@extrainfo}}%
-%        {}%
-%        {%
-%          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-%          \@extrainfo%
-%        }%
-%    } \\[\acvHeaderAfterSocialSkip]%
-%    \ifthenelse{\isundefined{\@quote}}%
-%      {}%
-%      {\headerquotestyle{\@quote\\}\vspace{\acvHeaderAfterQuoteSkip}}%
-%  \end{center}%
-%}
 \newcommand*{\makecvheader}{%
-  \begin{center}
+  \begin{minipage}[c]{0.68\textwidth}
   
-    \headerfirstnamestyle{\@firstname}\headerlastnamestyle{{}\acvHeaderNameDelim\@lastname}%
-    \\[\acvHeaderAfterNameSkip]%
-    \ifthenelse{\isundefined{\@position}}{}{\headerpositionstyle{\@position\\[\acvHeaderAfterPositionSkipEdit]}}%
+  	\begin{center}
+  	  \headerfirstnamestyle{\@firstname}\headerlastnamestyle{{}\acvHeaderNameDelim\@lastname}%
+      \\[\acvHeaderAfterNameSkip]%
+      \ifthenelse{\isundefined{\@position}}{}{\headerpositionstyle{\@position\\[\acvHeaderAfterPositionSkipEdit]}}%
+  	\end{center}
     
-    \begin{tabular}{r|l}
-    \headersocialstyle{\href{mailto:\@email}{\faEnvelope\acvHeaderIconSep\@email}} & \headeraddressstyle{\@addresslineone} \\
-      \headersocialstyle{\faMobile\acvHeaderIconSep\@mobile} & \headeraddressstyle{\@addresslinetwo} \\
-       & \headeraddressstyle{\@addresslinethree} \\
-    \end{tabular}
+  \end{minipage}%
+  \begin{minipage}[c]{0.32\textwidth}
+  
+  	\begin{flushright}
+  	  \headeraddressstyle{\@addresslineone}\\*
+	  \headeraddressstyle{\@addresslinetwo}\\*
+	  \headeraddressstyle{\@addresslinethree}\\
+	  \headersocialstyle{\href{mailto:\@email}{\faEnvelope\acvHeaderIconSep\@email}}\\
+	  \headersocialstyle{\faMobile\acvHeaderIconSep\@mobile}
+  	\end{flushright}
       
-  \end{center}%
+  \end{minipage}%
+  \vspace{\acvSectionTopSkip}
 }
 
 % Define a footer for CV
@@ -522,7 +452,7 @@
 % Define a section for CV
 % Usage: \cvsection{<section-title>}
 \newcommand{\cvsection}[1]{%
-  \vspace{\acvSectionTopSkip}
+%  \vspace{\acvSectionTopSkip}
   \sectionstyle{#1}
   \phantomsection
   \color{gray}\vhrulefill{0.9pt}
@@ -568,24 +498,60 @@
     \multicolumn{2}{L{\textwidth}}{\descriptionstyle{#5}}
   \end{tabular*}%
 }
+% Define a smaller width minipage (left) entry of cv information
+% Usage: \cvleftentry{<position>}{<title>}{<location>}{<date>}{<description>}
+\newcommand*{\cvleftentry}[5]{%
+  \setlength\tabcolsep{0pt}
+  \setlength{\extrarowheight}{0pt}
+  \raggedright
+  	{\setstretch{0.8}
+  	\entrytitlestyle{#2}\\
+  	\entrylocationstyle{#3}\\
+    \entrypositionstyle{#1}\\
+    \entrydatestyle{#4}\\
+    }
+%    \justify\vspace{1mm}
+%    \descriptionstyle{#5}
+  \vspace{4.0mm}
+}
+\newcommand*{\cvpositionentry}[5]{%
+  \setlength\tabcolsep{0pt}
+  \setlength{\extrarowheight}{0pt}
+  \parbox[t]{\textwidth - 2cm}{\raggedright{\setstretch{0.8}\entrytitlestyle{#2}\\
+  	\entrylocationstyle{#3}\\
+    \entrypositionstyle{#1}}}\hfill \parbox[t]{2cm}{\raggedleft\entrydatestyle{#4}}
+%    \justify\vspace{1mm}
+%    \descriptionstyle{#5}
+}
+
+
+
 % Define a project entry of cv information
 % Usage: \cvprojentry{<position>}{<title>}{<location>}{<date>}{<milestones>}{<role>}
 \newcommand*{\cvprojentry}[7]{%
-  \vspace{-2.0mm}
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
-  	\begin{flushleft}
-    \entrytitlestyle{#2} \entrydatestyle{(}\entrydatestyle{#4}\entrydatestyle{)}\\
-    \entrypositionstyle{#1}
-    \end{flushleft}
-    \vspace{-1.0mm}
-    \begin{justify}
-    \highlightdescriptionstyle{Milestones:} \descriptionstyle{#5} \highlightdescriptionstyle{Role:} \descriptionstyle{#6} \ifempty{#7}{}{\headersocialstyle{\href{#7}{\faExternalLink\acvHeaderIconSep #7}}}
-    \end{justify}
-    \vspace{3.0mm}
-    \hrule
-    \vspace{\acvSectionContentTopSkip}
-}
+	\parbox[t]{\textwidth - 2cm}{\raggedright\setstretch{0.8}
+  	\entrytitlestyle{#2}\\
+  	\entrypositionstyle{#1}}\hfill \parbox[t]{2cm}{\raggedleft\entrydatestyle{#4}}
+  	
+	\ifempty{#5#6}
+	{
+	  \ifempty{#7}
+	  {
+	  \vspace{4mm}
+	  }
+	  {
+	  \vspace{1mm}
+	  \raggedright\headersocialstyle{\href{#7}{\faExternalLink\acvHeaderIconSep #7}}
+	  }
+	}{
+	  \justify
+      \highlightdescriptionstyle{Milestones:} \descriptionstyle{#5} \highlightdescriptionstyle{Role:} \descriptionstyle{#6} \ifempty{#7}{}{
+      {\vspace{1mm}
+      \headersocialstyle{\href{#7}{\faExternalLink\acvHeaderIconSep #7}}}}
+    }
+    }
 
 % Define an environment for cvsubentry
 \newenvironment{cvsubentries}{%
@@ -614,14 +580,12 @@
 % Define an environment for cvhonor
 \newenvironment{cvhonors}{%
   \vspace{\acvSectionContentTopSkip}
-  \vspace{-2mm}
-  \begin{center}
+%  \vspace{-2mm}
     \setlength\tabcolsep{0pt}
     \setlength{\extrarowheight}{0pt}
-    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth * \real{0.12}} L{\textwidth - \textwidth * \real{0.12} - 2.5cm} R{2.5cm}}
+    \begin{flushleft}
 }{%
-    \end{tabular*}
-  \end{center}
+	\end{flushleft}
 }
 %% Define a line of cv information(honor, award or something else)
 %% Usage: \cvhonor{<position>}{<title>}{<location>}{<date>}
@@ -630,8 +594,11 @@
 %}
 % Define a line of cv information(honor, award or something else)
 % Usage: \cvhonor{<position>}{<title>}{<location>}{<date>}
-\newcommand*{\cvhonor}[4]{%
-  \honordatestyle{#4} & \honortitlestyle{#2} & \honorlocationstyle{#3} \\
+\newcommand*{\cvhonor}[2]{%
+	{\setstretch{0.8}
+	\honortitlestyle{#1} \entrydatestyle{(#2)}\\
+	}%
+	\vspace{2mm}
 }
 
 
@@ -653,6 +620,41 @@
 	\skilltypestyle{#1} & \leavevmode\skillsetstyle{#2} \\
 }
 
+
+% Define an environment for cvitems(for cventry)
+\newenvironment{cvitemsskills}{%
+  \begin{justify}
+  \begin{itemize}[leftmargin=*, nosep, noitemsep]
+    \setlength{\parskip}{0pt}
+    \renewcommand{\labelitemi}{\bullet}
+}{%
+  \end{itemize}
+  \end{justify}
+}
+
+% Define an environment for cvskill in minipage
+\newenvironment{cvleftskills}{%
+  \vspace{\acvSectionContentTopSkip}
+    \setlength\tabcolsep{1ex}
+    \setlength{\extrarowheight}{4pt}
+}{%    
+    \vspace{2mm}
+}
+% Define a line of cv information(skill)
+% Usage: \cvskill{<type>}{<skillset>}
+\newcommand*{\cvleftskill}[2]{%
+	{\setstretch{0.8}
+	\skilltypestyle{#1} \leavevmode\skillsetstyle{#2}}
+}
+% Define a line of cv information(skill)
+% Usage: \cvskill{<type>}{<skillset>}
+\newcommand*{\cvleftskillitemized}[2]{%
+	\skilltypestyle{#1}
+	\begin{cvitemsskills}
+		\setstretch{0.8}\skillsetstyle{#2}
+	\end{cvitemsskills}
+}
+
 % Define an environment for cvitems(for cventry)
 \newenvironment{cvitems}{%
   \vspace{-4.0mm}
@@ -664,6 +666,15 @@
   \end{itemize}
   \end{justify}
   \vspace{-4.0mm}
+}
+
+% Define an environment for cvitems(for cventry)
+\newenvironment{cvleftitems}{%
+  \begin{itemize}[leftmargin=2ex, nosep, noitemsep]
+    \setlength{\parskip}{0pt}
+    \renewcommand{\labelitemi}{\bullet}
+}{%
+  \end{itemize}
 }
 
 %% Define an environment for cvprojitem(for cventry)
