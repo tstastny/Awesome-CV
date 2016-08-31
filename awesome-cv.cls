@@ -90,6 +90,10 @@
 \RequirePackage{units}
 \RequirePackage{vwcol}  
 \RequirePackage{pbox}
+%\RequirePackage[backend=bibtex,
+%style=IEEEtran,
+%sorting=ynt]{biblatex}
+\RequirePackage{scrextend}
 
 %-------------------------------------------------------------------------------
 %                Configuration for directory locations
@@ -522,6 +526,18 @@
     \entrypositionstyle{#1}}}\hfill \parbox[t]{2cm}{\raggedleft\entrydatestyle{#4}}
 %    \justify\vspace{1mm}
 %    \descriptionstyle{#5}
+}
+% Define a publication entry of cv information
+%% Usage: \cvpubentry{<title>}{<keyword>}
+% Usage: \cvpubentry{<author>}{<title>}{<publisher>}{<vol>}{<num>}{<pp>}{<location>}{<date>}{<notes>}
+\newcommand*{\cvpubentry}[9]{%
+  \setlength\tabcolsep{0pt}
+  \setlength{\extrarowheight}{0pt}
+  \raggedright
+%  	\entrytitlestyle{#1}\\
+%	\printbibliography[keyword=#2,heading=none]
+	\vspace{2mm}
+	$\bullet$\hfill \begin{minipage}[t]{0.97\textwidth}{\vspace{-2.5mm}{\setstretch{0.8}\descriptionstyle{#1. #2. \textit{#3}. \ifempty{#4}{}{Vol. #4\ifempty{#5}{. }{(#5). }}\ifempty{#6}{}{pp. #6. }\ifempty{#7}{}{#7. } #8. \ifempty{#9}{}{#9.}}}}\end{minipage}
 }
 
 
