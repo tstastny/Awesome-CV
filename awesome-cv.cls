@@ -381,7 +381,7 @@
 \newcommand{\acvHeaderNameDelim}{\space}
 \newcommand{\acvHeaderAfterNameSkip}{1mm}
 \newcommand{\acvHeaderAfterPositionSkip}{.4mm}
-\newcommand{\acvHeaderAfterPositionSkipEdit}{1.5mm}
+\newcommand{\acvHeaderAfterPositionSkipEdit}{0.4mm}
 \newcommand{\acvHeaderAfterAddressSkip}{-.5mm}
 \newcommand{\acvHeaderIconSep}{\space}
 \newcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
@@ -631,7 +631,7 @@
 % Define a line of cv information(honor, award or something else)
 % Usage: \cvhonor{<position>}{<title>}{<location>}{<date>}
 \newcommand*{\cvhonor}[4]{%
-  \honordatestyle{#4} & \honortitlestyle{#2} & \honorlocationstyle{#3} \\
+  \honordatestyle{#4} & \honortitlestyle{#2} & \honorlocationstyle{#3} \ifthenelse{\isempty{#1}}{\\}{\\ & \multicolumn{2}{L{\textwidth}}{\skillsetstyle{#1}} \\}
 }
 
 
