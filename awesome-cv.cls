@@ -506,7 +506,7 @@
 %  \end{center}%%
   \begin{minipage}{0.7\textwidth}
 	%\begin{flushright}
-    \headerfirstnamestyle{\@firstname}\headerfirstnamestyle{{}\acvHeaderNameDelim\@lastname}\ifthenelse{\isundefined{\@suffix}}{}{\headerfirstnamestyle{,{}\acvHeaderNameDelim\@suffix}}\\%
+    \headerlastnamestyle{\@firstname}\headerlastnamestyle{{}\acvHeaderNameDelim\@lastname}\ifthenelse{\isundefined{\@suffix}}{}{\headerlastnamestyle{,{}\acvHeaderNameDelim\@suffix}}\\%
     \\
     \ifthenelse{\isundefined{\@position}}{}{\headerpositionstyle{\@position\\[\acvHeaderAfterPositionSkip]}}%
     \ifthenelse{\isundefined{\@addresslineone}}{}{\headeraddressstyle{\@addresslineone\\[\acvHeaderAfterAddressSkip]}}%
