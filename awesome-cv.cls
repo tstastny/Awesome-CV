@@ -212,7 +212,6 @@
   BoldItalicFont=*-BoldIt
 ]{SourceSansPro}
 
-
 %-------------------------------------------------------------------------------
 %                Configuration for styles
 %-------------------------------------------------------------------------------
@@ -233,6 +232,7 @@
 \newcommand*{\entrytitlestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
 \newcommand*{\entrysubtitlestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{graytext} #1}}
 \newcommand*{\entrypositionstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\scshape\color{graytext} #1}}
+\newcommand*{\entrypositionstyleitalic}[1]{{\fontsize{9pt}{1em}\bodyfont\slshape\scshape\color{graytext} #1}}
 \newcommand*{\entrydatestyle}[1]{{\fontsize{8pt}{1em}\bodyfontlight\color{graytext} #1}}
 \newcommand*{\entrylocationstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
 \newcommand*{\descriptionstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\upshape\color{text} #1}}
@@ -600,14 +600,14 @@
   \end{tabular*}%
 }
 % Define an entry of education cv information
-% Usage: \cventry{<position>}{<title>}{<location>}{<date>}{<description>}
-\newcommand*{\cveduentry}[5]{%
+% Usage: \cventry{<degree>}{<lab>}{<institution>}{<location>}{<date>}{<description>}
+\newcommand*{\cveduentry}[6]{%
   \vspace{-2.0mm}
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{2cm} L{\textwidth - 2cm}} % \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth * \real{0.12}} L{\textwidth - \textwidth * \real{0.12} - 2.5cm} R{2.5cm}}
-    \entrydatestyle{#4} & \entrytitlestyle{#1} \entrypositionstyle{| #2}\entrydatestyle{, #3.} \\
-    & \descriptionstyle{#5} \\
+    \entrydatestyle{#5} & \entrytitlestyle{#1 } \entrypositionstyle{| }\ifthenelse{\isempty{#2}}{}{\entrypositionstyleitalic{#2},} \entrypositionstyle{#3}\entrydatestyle{, #4.} \\
+    & \descriptionstyle{#6} \\
   \end{tabular*}%
 }
 % Define a project entry of cv information
