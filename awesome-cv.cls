@@ -643,11 +643,12 @@
 %}
 % Define a project wide entry of cv information
 % Usage: \cvprojwideentry{<project>}{<project subtext>}{<support>}{<date>}{<description>}{<website>}{<show description>}
-\newcommand*{\cvprojwideentry}[7]{%
+\newcommand*{\cvprojwideentry}[8]{%
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   \begin{tabularx}{\textwidth}{@{\extracolsep{\fill}} L{2cm} L{\textwidth - 2cm}}
       \entrydatestyle{#4} & \entrytitlestyle{#1}\ifempty{#2}{}{\entrysubtitlestyle{: #2}} \\
+      \ifempty{#8}{}{& \entrysubtitlestyle{#8}\\}
       & \entrypositionstyle{#3} \ifempty{#5#6}{}{\\}
       \ifthenelse{\equal{#7}{true}}{& \descriptionstyle{#5} \ifempty{#6}{}{\\}}{}
       \ifempty{#6}{}{& \headersocialstyle{\href{#6}{\faExternalLink\acvHeaderIconSep #6}}}
