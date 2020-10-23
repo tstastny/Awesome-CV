@@ -221,7 +221,7 @@
 \newcommand*{\headerlastnamestyle}[1]{{\fontsize{32pt}{1em}\headerfont\bfseries\color{text} #1}}
 \newcommand*{\headerpositionstyle}[1]{{\fontsize{12pt}{1em}\bodyfont\scshape\color{awesome} #1}}
 \newcommand*{\headeraddressstyle}[1]{{\fontsize{8pt}{1em}\headerfont\itshape\color{lighttext} #1}}
-\newcommand*{\headersocialstyle}[1]{{\fontsize{6.8pt}{1em}\headerfont\color{text} #1}}
+\newcommand*{\headersocialstyle}[1]{{\fontsize{6.8pt}{1em}\headerfont\color{awesome} #1}}
 \newcommand*{\headerquotestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\itshape\color{darktext} #1}}
 \newcommand*{\footerstyle}[1]{{\fontsize{8pt}{1em}\footerfont\scshape\color{lighttext} #1}}
 \newcommand*{\sectionstyle}[1]{{\fontsize{16pt}{1em}\bodyfont\scshape\bfseries\color{text}\@sectioncolor #1}}
@@ -292,6 +292,9 @@
 \newcommand*{\addresslineone}[1]{\def\@addresslineone{#1}}
 \newcommand*{\addresslinetwo}[1]{\def\@addresslinetwo{#1}}
 \newcommand*{\addresslinethree}[1]{\def\@addresslinethree{#1}}
+
+% date of birth
+\newcommand*{\dob}[1]{\def\@dob{#1}}
 
 % Define writer's position
 % Usage: \name{<position>}
@@ -513,8 +516,9 @@
     \ifthenelse{\isundefined{\@addresslinetwo}}{}{\headeraddressstyle{\@addresslinetwo\\[\acvHeaderAfterAddressSkip]}}%
     \ifthenelse{\isundefined{\@addresslinethree}}{}{\headeraddressstyle{\@addresslinethree\\[\acvHeaderAfterAddressSkip]}}%
     \headersocialstyle{%
-    		\href{mailto:\@email}{\faEnvelope\acvHeaderIconSep\@email}\acvHeaderSocialSep\faMobile\acvHeaderIconSep\@mobile%
+    		\href{mailto:\@email}{\faEnvelope\acvHeaderIconSep\@email}\acvHeaderSocialSep\faMobile\acvHeaderIconSep\@mobile\\%
         }%
+    \ifthenelse{\isundefined{\@dob}}{}{\headeraddressstyle{Date of Birth: \@dob\\}}
     %\end{flushright}
   \end{minipage}
   \begin{minipage}{0.3\textwidth}
@@ -606,7 +610,7 @@
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{2cm} L{\textwidth - 2cm}} % \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth * \real{0.12}} L{\textwidth - \textwidth * \real{0.12} - 2.5cm} R{2.5cm}}
-    \entrydatestyle{#5} & \entrytitlestyle{#1 } \entrypositionstyle{| }\ifthenelse{\isempty{#2}}{}{\entrypositionstyleitalic{#2},} \entrypositionstyle{#3}\entrydatestyle{, #4.} \\
+    \entrydatestyle{#5} & \entrytitlestyle{#3, #4} \entrypositionstyle{| #1} \\
     & \descriptionstyle{#6} \\
   \end{tabular*}%
 }
