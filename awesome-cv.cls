@@ -659,6 +659,19 @@
   \end{tabularx}
 }
 
+% Define a teaching entry of cv information
+% Usage: \cvteachentry{<institute>}{<position>}{<subject>}{<date>}{<description>}{<website>}{<show description>}
+\newcommand*{\cvteachentry}[7]{%
+  \setlength\tabcolsep{0pt}
+  \setlength{\extrarowheight}{0pt}
+  \begin{tabularx}{\textwidth}{@{\extracolsep{\fill}} L{2cm} L{\textwidth - 2cm}}
+      \entrydatestyle{#4} & \entrytitlestyle{#1} \entrypositionstyle{| #2} \\
+      \ifempty{#3}{}{& \entrysubtitlestyle{#3}\\}
+      \ifthenelse{\equal{#7}{true}}{& \descriptionstyle{#5} \ifempty{#6}{}{\\}}{}
+      \ifempty{#6}{}{& \headersocialstyle{\href{#6}{\faExternalLink\acvHeaderIconSep #6}}}
+  \end{tabularx}
+}
+
 % Define an invited talk entry of cv information
 % Usage: \cvtalkentry{<venue>}{<session>}{<title>}{<presenters>}{<location>}{<date>}{<link>}
 \newcommand*{\cvtalkentry}[7]{%
