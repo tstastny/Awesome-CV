@@ -53,6 +53,9 @@
 % set to true if you want to see teaching descriptions
 \newcommand{\showteachingdescriptions}{true}
 
+%
+\newcommand{\weblink}[2]{\headersocialstyle{\href{#1}{\faExternalLink\acvHeaderIconSep {#2}}}}
+
 
 %-------------------------------------------------------------------------------
 %	PERSONAL INFORMATION
@@ -96,16 +99,28 @@
 
 
 %-------------------------------------------------------------------------------
+%   CV SUMMARY + NAVIGATION
+
+\descriptionstyle{	
+	\hyperref[sec:funding]{\color{awesome}Grants}: Authorship of \textbf{successful} research proposals with funding totaling \textbf{$>$1.7M USD} \\
+	\hyperref[sec:pub]{\color{awesome}Publications}: As of \today,	publication count: \textbf{31}, h-index: \textbf{11}, citation count: \textbf{484} (source: Google Scholar)\\
+	\hyperref[sec:teaching]{\color{awesome}Teaching}: \textbf{Supervision} of \textbf{50+} Masters and Bachelors theses. \textbf{Lecturer} for 2 Masters courses. \textbf{Teaching Assistant} for 2 Bachelors courses.\\
+	\hyperref[sec:exp]{\color{awesome}Field experience}: Organization/participation of/in aerial-robotic field-campaigns to the Arctic, Antarctic, Amazon, and Swiss/Italian Alps
+	}
+
+%-------------------------------------------------------------------------------
 %	CV/RESUME CONTENT
 %	Each section is imported separately, open each file in turn to modify content
 %-------------------------------------------------------------------------------
 %\input{cv/statement.tex}
 \input{cv/education.tex}
-\input{cv/publications.tex}
-\input{cv/projects3.tex}
+\input{cv/research_experience.tex}
+\input{cv/funding.tex}
+\input{cv/publications.tex}\clearpage
+%\input{cv/projects3.tex}
 \input{cv/teaching.tex}
-\input{cv/honors.tex}\clearpage
-\input{cv/service.tex}
+\input{cv/honors.tex}%\clearpage
+\input{cv/service.tex}\clearpage
 %\input{cv/skills.tex}
 \input{cv/talks.tex}
 

@@ -87,6 +87,7 @@
 }
 \RequirePackage{graphicx}
 \RequirePackage{multicol}
+\RequirePackage{multirow}
 \RequirePackage{units}
 
 \usepackage{hanging}
@@ -672,6 +673,19 @@
   \end{tabularx}
 }
 
+% Define a research experience entry of cv information
+% Usage: \cvexpentry{<institute>}{<position>}{<subject>}{<date>}{<description>}{<website>}{<show description>}
+\newcommand*{\cvexpentry}[7]{%
+  \setlength\tabcolsep{0pt}
+  \setlength{\extrarowheight}{0pt}
+  \begin{tabularx}{\textwidth}{@{\extracolsep{\fill}} L{2cm} L{\textwidth - 2cm}}
+      \entrydatestyle{#4} & \entrytitlestyle{#1} \entrypositionstyle{| #2} \\
+      \ifempty{#3}{}{& \entrysubtitlestyle{#3}\\}
+      \ifthenelse{\equal{#7}{true}}{& \descriptionstyle{#5} \ifempty{#6}{}{\\}}{}
+      \ifempty{#6}{}{& \headersocialstyle{\href{#6}{\faExternalLink\acvHeaderIconSep #6}}}
+  \end{tabularx}
+}
+
 % Define an invited talk entry of cv information
 % Usage: \cvtalkentry{<venue>}{<session>}{<title>}{<presenters>}{<location>}{<date>}{<link>}
 \newcommand*{\cvtalkentry}[7]{%
@@ -703,7 +717,19 @@
   \begin{tabularx}{\textwidth}{L{2cm} L{\textwidth - 2cm}}
   	\entrydatestyle{#5} & \entrysubtitlestyle{#2} \\
 	& \descriptionstyle{#3} \\
-	& \italicdescriptionstyle{#1. \ifempty{#4}{}{#4.} \ifempty{#7}{}{#7}}
+	& \italicdescriptionstyle{#1. \ifempty{#4}{}{#4.} \ifempty{#7}{}{#7}} \ifempty{#6}{}{\\
+	& \headersocialstyle{\href{#6}{\faExternalLink\acvHeaderIconSep #6}}}
+  \end{tabularx}
+}
+
+% Define a grant entry of cv information
+% Usage: \cvgrantentry{<source>}{<title>}{<role>}{<period>}{<funding>}
+\newcommand*{\cvgrantentry}[5]{%
+  \setlength\tabcolsep{0pt}
+  \setlength{\extrarowheight}{0pt}
+  \begin{tabularx}{\textwidth}{L{2cm} L{\textwidth - 2cm}}
+  	\entrydatestyle{#4} & \entrysubtitlestyle{#2} \\
+	& \descriptionstyle{#3.} \italicdescriptionstyle{#1.} \descriptionstyle{\textbf{#5}}
   \end{tabularx}
 }
 
