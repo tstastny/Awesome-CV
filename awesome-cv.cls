@@ -90,6 +90,7 @@
 \RequirePackage{multirow}
 \RequirePackage{units}
 
+\usepackage{changepage}
 \usepackage{hanging}
 
 %-------------------------------------------------------------------------------
@@ -723,13 +724,13 @@
 }
 
 % Define a grant entry of cv information
-% Usage: \cvgrantentry{<source>}{<title>}{<role>}{<period>}{<funding>}
-\newcommand*{\cvgrantentry}[5]{%
+% Usage: \cvgrantentry{<source>}{<title>}{<role>}{<period>}{<funding>}{<PI>}
+\newcommand*{\cvgrantentry}[6]{%
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   \begin{tabularx}{\textwidth}{L{2cm} L{\textwidth - 2cm}}
   	\entrydatestyle{#4} & \entrysubtitlestyle{#2} \\
-	& \descriptionstyle{#3.} \italicdescriptionstyle{#1.} \descriptionstyle{\textbf{#5}}
+	& \ifthenelse{\equal{#3}{PI}}{\descriptionstyle{\textbf{PI: #6}.}}{\descriptionstyle{Role: \textbf{#3}. PI: #6.}} \italicdescriptionstyle{#1.} \descriptionstyle{\textbf{#5}}\\
   \end{tabularx}
 }
 
