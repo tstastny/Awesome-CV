@@ -92,6 +92,7 @@
 
 \usepackage{changepage}
 \usepackage{hanging}
+\usepackage[export]{adjustbox}
 
 %-------------------------------------------------------------------------------
 %                Configuration for directory locations
@@ -509,27 +510,44 @@
 %      {}%
 %      {\headerquotestyle{\@quote\\}\vspace{\acvHeaderAfterQuoteSkip}}%
 %  \end{center}%%
-  \begin{minipage}{0.7\textwidth}
-	%\begin{flushright}
-    \headerlastnamestyle{\@firstname}\headerlastnamestyle{{}\acvHeaderNameDelim\@lastname}\ifthenelse{\isundefined{\@suffix}}{}{\headerlastnamestyle{,{}\acvHeaderNameDelim\@suffix}}\\%
-    \\
-    \ifthenelse{\isundefined{\@position}}{}{\headerpositionstyle{\@position\\[\acvHeaderAfterPositionSkip]}}%
-    \ifthenelse{\isundefined{\@addresslineone}}{}{\headeraddressstyle{\@addresslineone\\[\acvHeaderAfterAddressSkip]}}%
-    \ifthenelse{\isundefined{\@addresslinetwo}}{}{\headeraddressstyle{\@addresslinetwo\\[\acvHeaderAfterAddressSkip]}}%
-    \ifthenelse{\isundefined{\@addresslinethree}}{}{\headeraddressstyle{\@addresslinethree\\[\acvHeaderAfterAddressSkip]}}%
-    \headersocialstyle{%
-    		\href{mailto:\@email}{\faEnvelope\acvHeaderIconSep\@email}\acvHeaderSocialSep\faMobile\acvHeaderIconSep\@mobile\\%
-        }%
-    \ifthenelse{\isundefined{\@dob}}{}{\headeraddressstyle{Date of Birth: \@dob\\}}
-    %\end{flushright}
-  \end{minipage}
-  \begin{minipage}{0.3\textwidth}
-  	\begin{flushright}
-  	\setlength{\fboxsep}{3pt}
-	\setlength{\fboxrule}{0.9pt}
-	\fcolorbox{gray}{white}{\includegraphics[trim={0 5cm 0 5cm},clip,width=0.55\linewidth]{BioPhoto_ThomasStastny_smaller2_grayscale.png}}
-  	\end{flushright}
-  \end{minipage}
+
+%  \begin{minipage}{0.7\textwidth}
+%	%\begin{flushright}
+%    \headerlastnamestyle{\@firstname}\headerlastnamestyle{{}\acvHeaderNameDelim\@lastname}\ifthenelse{\isundefined{\@suffix}}{}{\headerlastnamestyle{,{}\acvHeaderNameDelim\@suffix}}\\%
+%    \\
+%    \ifthenelse{\isundefined{\@position}}{}{\headerpositionstyle{\@position\\[\acvHeaderAfterPositionSkip]}}%
+%    \ifthenelse{\isundefined{\@addresslineone}}{}{\headeraddressstyle{\@addresslineone\\[\acvHeaderAfterAddressSkip]}}%
+%    \ifthenelse{\isundefined{\@addresslinetwo}}{}{\headeraddressstyle{\@addresslinetwo\\[\acvHeaderAfterAddressSkip]}}%
+%    \ifthenelse{\isundefined{\@addresslinethree}}{}{\headeraddressstyle{\@addresslinethree\\[\acvHeaderAfterAddressSkip]}}%
+%    \headersocialstyle{%
+%    		\href{mailto:\@email}{\faEnvelope\acvHeaderIconSep\@email}\acvHeaderSocialSep\faMobile\acvHeaderIconSep\@mobile\\%
+%        }%
+%    \ifthenelse{\isundefined{\@dob}}{}{\headeraddressstyle{Date of Birth: \@dob\\}}
+%    %\end{flushright}
+%  \end{minipage}
+%  \begin{minipage}{0.3\textwidth}
+%  	\begin{flushright}
+%  	\setlength{\fboxsep}{3pt}
+%	\setlength{\fboxrule}{0.9pt}
+%	\fcolorbox{gray}{white}{\includegraphics[trim={0 5cm 0 5cm},clip,width=0.55\linewidth]{BioPhoto_ThomasStastny_smaller2_grayscale.png}}
+%  	\end{flushright}
+%  \end{minipage}
+
+	\setlength\tabcolsep{0pt}
+  	\setlength{\extrarowheight}{0pt}
+  	\begin{minipage}[t]{0.7\textwidth}
+  		\vspace{-1em}
+		\headerlastnamestyle{\@firstname}\headerlastnamestyle{{}\acvHeaderNameDelim\@lastname}\ifthenelse{\isundefined{\@suffix}}{}{\headerlastnamestyle{,{}\acvHeaderNameDelim\@suffix}}\\%
+    		\\
+    		\ifthenelse{\isundefined{\@position}}{}{\headerpositionstyle{\@position\\[\acvHeaderAfterPositionSkip]}}%
+    		\ifthenelse{\isundefined{\@addresslineone}}{}{\headeraddressstyle{\@addresslineone\\[\acvHeaderAfterAddressSkip]}}%
+    		\ifthenelse{\isundefined{\@addresslinetwo}}{}{\headeraddressstyle{\@addresslinetwo\\[\acvHeaderAfterAddressSkip]}}%
+    		\ifthenelse{\isundefined{\@addresslinethree}}{}{\headeraddressstyle{\@addresslinethree\\[\acvHeaderAfterAddressSkip]}}%
+    		\headersocialstyle{%
+    			\href{mailto:\@email}{\faEnvelope\acvHeaderIconSep\@email}\acvHeaderSocialSep\faMobile\acvHeaderIconSep\@mobile\\%
+        		}%
+    		\ifthenelse{\isundefined{\@dob}}{}{\headeraddressstyle{Date of Birth: \@dob\\}}  	
+  	\end{minipage} \hfill \setlength{\fboxsep}{3pt}\setlength{\fboxrule}{0.9pt}\fcolorbox{gray}{white}{\includegraphics[trim={0 5cm 0 5cm},clip,width=0.165\textwidth,valign=t]{BioPhoto_ThomasStastny_smaller2_grayscale.png}}  	
 }
 %\newcommand*{\makecvheader}{%
 %  \begin{center}
