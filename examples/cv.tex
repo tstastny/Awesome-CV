@@ -56,13 +56,18 @@
 %
 \newcommand{\weblink}[2]{\headersocialstyle{\href{#1}{\faExternalLink\acvHeaderIconSep {#2}}}}
 
+% set to true for headshot in header
+\newif\ifshowheadshot
+%\showheadshottrue
+\showheadshotfalse
+
 
 %-------------------------------------------------------------------------------
 %	PERSONAL INFORMATION
 %	Comment any of the lines below if they are not required
 %-------------------------------------------------------------------------------
 \name{Thomas}{Stastny}
-\position{Senior Researcher}
+\position{Aerial-Robotics Controls Researcher}
 \address{Autonomous Systems Lab, ETH Z\"{u}rich, LEE J 314, Leonhardstrasse 21, 8092 Z\"{u}rich, Switzerland}
 \addresslineone{Autonomous Systems Lab, ETH Z\"{u}rich}
 \addresslinetwo{LEE J 314, Leonhardstrasse 21}
@@ -70,8 +75,9 @@
 %
 \mobile{(+41) 79 883 7765}
 \email{tstastny@ethz.ch}
-\dob{22, May, 1990}
+%\dob{22, May, 1990}
 %\gscholar{https://scholar.google.ch/citations?user=R5Fs1A4AAAAJ&hl=en}
+\citizen{US Citizen}
 
 %\homepage{www.posquit0.com}
 %\github{posquit0}
@@ -94,50 +100,26 @@
 % Leave any of these blank if they are not needed
 \makecvfooter
   {\today}
-  {Thomas Stastny~~~·~~~Curriculum Vitae}
+  {Thomas Stastny~~~·~~~Resume}
   {\thepage}
-
-
-%-------------------------------------------------------------------------------
-%   CV SUMMARY + NAVIGATION
-
-\descriptionstyle{	
-	\hyperref[sec:funding]{\color{awesome}Grants}: Authorship of \textbf{successful} research proposals with funding totaling \textbf{$>$1.7M USD} \\
-	\hyperref[sec:pub]{\color{awesome}Publications}: As of \today,	publication count: \textbf{31}, h-index: \textbf{11}, i10-index: \textbf{14}, citation count: \textbf{488} (source: \headersocialstyle{\ifthenelse{\isundefined{\@gscholar}}{}{\href{https://scholar.google.ch/citations?user=R5Fs1A4AAAAJ\&hl=en}{\faGraduationCap\acvHeaderIconSep Google Scholar}}})\\
-	\hyperref[sec:teaching]{\color{awesome}Teaching}: \textbf{Supervision} of \textbf{2} PhD students and \textbf{50+} Masters and Bachelors theses. \textbf{Lecturer} for 2 Masters courses. \textbf{TA} for 2 Bachelors courses.\\
-	\hyperref[sec:exp]{\color{awesome}Field experience}: Organization/participation of/in aerial-robotic field-campaigns to the Arctic, Antarctic, Amazon, and Swiss/Italian Alps
-	}
-
-%-------------------------------------------------------------------------------
-%   RESEARCH INTERESTS
-
-\begingroup
-%\begin{adjustwidth}{1cm}{0cm} % \setlength{\parindent}{-1cm}
-\setlength\tabcolsep{0pt}
-\setlength{\extrarowheight}{0pt}
-\descriptionstyle{
-	\begin{tabular}[t]{p{2.5cm} p{\textwidth-2.5cm}}
-	\emph{Research interests}: & Environment-aware control and planning, autonomous aerial-robotic payload transport, novel airflow sensing and perception techniques, system identification of the post-stall regime, safe experiment-based reinforcement learning for modeling and/or control of complex aerodynamic effects on hybrid aerial robots.
-	\end{tabular}
-	}
-%\end{adjustwidth}
-\endgroup
 
 %-------------------------------------------------------------------------------
 %	CV/RESUME CONTENT
 %	Each section is imported separately, open each file in turn to modify content
 %-------------------------------------------------------------------------------
-%\input{cv/statement.tex}
-\input{cv/education.tex}
-\input{cv/research_experience.tex}
-\input{cv/funding.tex}
-\input{cv/publications.tex}%\clearpage
+\input{cv/statement.tex}\vspace{-14pt}
+\input{cv/education.tex}\vspace{-6pt}
+\input{cv/research_experience.tex}\vspace{-10pt}
+\input{cv/skills.tex}\clearpage
+\input{cv/field_experience.tex}
+%\input{cv/funding.tex}
+\input{cv/publications.tex}\vspace{-4pt}
 %\input{cv/projects3.tex}
-\input{cv/teaching.tex}
+\input{cv/teaching.tex}\vspace{4pt}
 \input{cv/honors.tex}%\clearpage
-\input{cv/service.tex}\clearpage
-%\input{cv/skills.tex}
-\input{cv/talks.tex}
+%\input{cv/service.tex}%\clearpage
+
+%\input{cv/talks.tex}
 
 
 %-------------------------------------------------------------------------------

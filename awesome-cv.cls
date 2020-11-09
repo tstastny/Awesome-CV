@@ -93,6 +93,7 @@
 \usepackage{changepage}
 \usepackage{hanging}
 \usepackage[export]{adjustbox}
+\usepackage{makecell}
 
 %-------------------------------------------------------------------------------
 %                Configuration for directory locations
@@ -223,11 +224,13 @@
 \newcommand*{\headerfirstnamestyle}[1]{{\fontsize{32pt}{1em}\headerfontlight\color{graytext} #1}}
 \newcommand*{\headerlastnamestyle}[1]{{\fontsize{32pt}{1em}\headerfont\bfseries\color{text} #1}}
 \newcommand*{\headerpositionstyle}[1]{{\fontsize{12pt}{1em}\bodyfont\scshape\color{awesome} #1}}
+\newcommand*{\headerpositionlowercasestyle}[1]{{\fontsize{12pt}{1em}\bodyfont\color{awesome} #1}}
 \newcommand*{\headeraddressstyle}[1]{{\fontsize{8pt}{1em}\headerfont\itshape\color{lighttext} #1}}
 \newcommand*{\headersocialstyle}[1]{{\fontsize{6.8pt}{1em}\headerfont\color{awesome} #1}}
 \newcommand*{\headerquotestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\itshape\color{darktext} #1}}
 \newcommand*{\footerstyle}[1]{{\fontsize{8pt}{1em}\footerfont\scshape\color{lighttext} #1}}
-\newcommand*{\sectionstyle}[1]{{\fontsize{16pt}{1em}\bodyfont\scshape\bfseries\color{text}\@sectioncolor #1}}
+\newcommand*{\sectionstyle}[1]{{\fontsize{16pt}{1em}\bodyfont\color{text}\@sectioncolor #1}}%\scshape\bfseries
+\newcommand*{\sectionstylenocolor}[1]{{\fontsize{16pt}{1em}\bodyfont\color{text} #1}}%\scshape\bfseries
 \newcommand*{\subsectionstyle}[1]{{\fontsize{12pt}{1em}\bodyfont\scshape\textcolor{text}{#1}}}
 \newcommand*{\paragraphstyle}{\fontsize{9pt}{1em}\bodyfontlight\upshape\color{text}}
 
@@ -306,6 +309,10 @@
 % Defines writer's mobile (optional)
 % Usage: \mobile{<mobile number>}
 \newcommand*{\mobile}[1]{\def\@mobile{#1}}
+
+% Defines writer's citizenship status (optional)
+% Usage: \mobile{<citizenship>}
+\newcommand*{\citizen}[1]{\def\@citizen{#1}}
 
 % Defines writer's email (optional)
 % Usage: \email{<email adress>}
@@ -533,21 +540,32 @@
 %  	\end{flushright}
 %  \end{minipage}
 
-	\setlength\tabcolsep{0pt}
-  	\setlength{\extrarowheight}{0pt}
-  	\begin{minipage}[t]{0.7\textwidth}
-  		\vspace{-1em}
-		\headerlastnamestyle{\@firstname}\headerlastnamestyle{{}\acvHeaderNameDelim\@lastname}\ifthenelse{\isundefined{\@suffix}}{}{\headerlastnamestyle{,{}\acvHeaderNameDelim\@suffix}}\\%
-    		\\
-    		\ifthenelse{\isundefined{\@position}}{}{\headerpositionstyle{\@position\\[\acvHeaderAfterPositionSkip]}}%
-    		\ifthenelse{\isundefined{\@addresslineone}}{}{\headeraddressstyle{\@addresslineone\\[\acvHeaderAfterAddressSkip]}}%
-    		\ifthenelse{\isundefined{\@addresslinetwo}}{}{\headeraddressstyle{\@addresslinetwo\\[\acvHeaderAfterAddressSkip]}}%
-    		\ifthenelse{\isundefined{\@addresslinethree}}{}{\headeraddressstyle{\@addresslinethree\\[\acvHeaderAfterAddressSkip]}}%
-    		\headersocialstyle{%
-    			\href{mailto:\@email}{\faEnvelope\acvHeaderIconSep\@email}\acvHeaderSocialSep\faMobile\acvHeaderIconSep\@mobile\\%
-        		}%
-    		\ifthenelse{\isundefined{\@dob}}{}{\headeraddressstyle{Date of Birth: \@dob\\}}  	
-  	\end{minipage} \hfill \setlength{\fboxsep}{3pt}\setlength{\fboxrule}{0.9pt}\fcolorbox{gray}{white}{\includegraphics[trim={0 5cm 0 5cm},clip,width=0.165\textwidth,valign=t]{BioPhoto_ThomasStastny_smaller2_grayscale.png}}  	
+	\ifshowheadshot
+	% SHOW HEADSHOT
+		\setlength\tabcolsep{0pt}
+  		\setlength{\extrarowheight}{0pt}
+  		\begin{minipage}[t]{0.7\textwidth}
+  			\vspace{-1em}
+			\headerlastnamestyle{\@firstname}\headerlastnamestyle{{}\acvHeaderNameDelim\@lastname}\ifthenelse{\isundefined{\@suffix}}{}{\headerlastnamestyle{,{}\acvHeaderNameDelim\@suffix}}\\%
+    			\\
+    			\ifthenelse{\isundefined{\@position}}{}{\headerpositionstyle{\@position\\[\acvHeaderAfterPositionSkip]}}%
+    			\ifthenelse{\isundefined{\@addresslineone}}{}{\headeraddressstyle{\@addresslineone\\[\acvHeaderAfterAddressSkip]}}%
+    			\ifthenelse{\isundefined{\@addresslinetwo}}{}{\headeraddressstyle{\@addresslinetwo\\[\acvHeaderAfterAddressSkip]}}%
+    			\ifthenelse{\isundefined{\@addresslinethree}}{}{\headeraddressstyle{\@addresslinethree\\[\acvHeaderAfterAddressSkip]}}%
+    			\headersocialstyle{%
+    				\href{mailto:\@email}{\faEnvelope\acvHeaderIconSep\@email}\acvHeaderSocialSep\faMobile\acvHeaderIconSep\@mobile\acvHeaderSocialSep\faGlobe\acvHeaderIconSep\@citizen\\%
+        			}%
+    			\ifthenelse{\isundefined{\@dob}}{}{\headeraddressstyle{Date of Birth: \@dob\\}}  	
+  		\end{minipage} \hfill \setlength{\fboxsep}{3pt}\setlength{\fboxrule}{0.9pt}\fcolorbox{gray}{white}{\includegraphics[trim={0 5cm 0 5cm},clip,width=0.165\textwidth,valign=t]{BioPhoto_ThomasStastny_smaller2_grayscale.png}}
+	\else
+	% DONT SHOW HEADSHOT  		
+		\begin{center}
+  			\headerfirstnamestyle{\@firstname}\headerlastnamestyle{{}\acvHeaderNameDelim\@lastname}\ifthenelse{\isundefined{\@suffix}}{}{\headerlastnamestyle{,{}\acvHeaderNameDelim\@suffix}}\\[3pt]%
+			\ifthenelse{\isundefined{\@position}}{}{\headerpositionlowercasestyle{\@position\\[\acvHeaderAfterPositionSkip]}}
+			\ifthenelse{\isundefined{\@addresslineone}}{}{\headeraddressstyle{\@addresslineone, }}\ifthenelse{\isundefined{\@addresslinetwo}}{}{\headeraddressstyle{\@addresslinetwo, }}\ifthenelse{\isundefined{\@addresslinethree}}{}{\headeraddressstyle{\@addresslinethree\\[\acvHeaderAfterAddressSkip]}}%
+    			\headersocialstyle{\href{mailto:\@email}{\faEnvelope\acvHeaderIconSep\@email}\acvHeaderSocialSep\faMobile\acvHeaderIconSep\@mobile\acvHeaderSocialSep\faGlobe\acvHeaderIconSep\@citizen\\}%
+    		\end{center}
+    	\fi
 }
 %\newcommand*{\makecvheader}{%
 %  \begin{center}
@@ -579,6 +597,15 @@
 \newcommand{\cvsection}[1]{%
   \vspace{\acvSectionTopSkip}
   \sectionstyle{#1}
+  \phantomsection
+  \color{gray}\vhrulefill{0.9pt}
+}
+
+% Define a section for CV
+% Usage: \cvsection{<section-title>}
+\newcommand{\cvsectionalt}[2]{%
+  \vspace{\acvSectionTopSkip}
+  \sectionstylenocolor{#2} \sectionstyle{#1}
   \phantomsection
   \color{gray}\vhrulefill{0.9pt}
 }
@@ -624,15 +651,41 @@
   \end{tabular*}%
 }
 % Define an entry of education cv information
-% Usage: \cventry{<degree>}{<lab>}{<institution>}{<location>}{<date>}{<description>}
-\newcommand*{\cveduentry}[6]{%
+% Usage: \cventry{<degree>}{<lab>}{<institution>}{<location>}{<date>}{<description line 1>}{<description line 2>}
+\newcommand*{\cveduentry}[7]{%
   \vspace{-2.0mm}
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
-  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{2cm} L{\textwidth - 2cm}} % \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth * \real{0.12}} L{\textwidth - \textwidth * \real{0.12} - 2.5cm} R{2.5cm}}
-    \entrydatestyle{#5} & \entrytitlestyle{#3, #4} \entrypositionstyle{| #1} \\
-    & \descriptionstyle{#6} \\
-  \end{tabular*}%
+  \renewcommand{\arraystretch}{0.85}
+  \begin{tabularx}{\textwidth}{@{\extracolsep{\fill}} L{2cm} L{\textwidth - 2cm}}
+    \entrydatestyle{#5} & \entrytitlestyle{#3}\descriptionstyle{, #4} \\
+    & \descriptionstyle{#6} \ifthenelse{\isempty{#7}}{}{\\ & \descriptionstyle{#7}}
+  \end{tabularx}%
+  \smallskip
+}
+%% Define an short project entry of cv information
+%% Usage: \cvshortproj{<project>}{<date>}{<description>}
+%\newcommand*{\cvshortproj}[3]{%
+%    \setlength\tabcolsep{0pt}
+%  	\setlength{\extrarowheight}{0pt}
+%  	\setlength{\parskip}{0pt}
+%  	\begin{tabularx}{\textwidth}{@{\extracolsep{\fill}} L{2cm} L{\textwidth - 2cm}}
+%		\entrydatestyle{#2} & \entrytitlestyle{#1}\\
+%      	& \descriptionstyle{
+%    		\begin{cvitems}
+%    			\item #3
+%    		\end{cvitems}
+%    		}
+%  	\end{tabularx}
+%}
+% Define an short project entry of cv information
+% Usage: \cvshortproj{<project>}{<date>}{<description>}{<link>}
+\newcommand*{\cvshortproj}[4]{%
+%    \setlength\tabcolsep{0pt}
+%  	\setlength{\extrarowheight}{0pt}
+% 	\setlength{\parskip}{0pt}
+	%\flushleft
+	\descriptionstyle{#3} \entrydatestyle{(#2)} \descriptionstyle{#4}
 }
 % Define a project entry of cv information
 % Usage: \cvprojentry{<position>}{<title>}{<location>}{<date>}{<milestones>}{<role>}
@@ -641,7 +694,7 @@
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   	\begin{flushleft}
-    \entrytitlestyle{#2} \entrydatestyle{(}\entrydatestyle{#4}\entrydatestyle{)}\\
+    \entrytitlestyle{#2} \entrydatestyle{(#4)}\\
     \entrypositionstyle{#1}
     \end{flushleft}
     \vspace{-1.0mm}
@@ -692,13 +745,23 @@
   \end{tabularx}
 }
 
+\newcommand*{\cvshortteach}[3]{%
+	\setlength\tabcolsep{0pt}
+  	\setlength{\extrarowheight}{0pt}
+  	\setlength{\parskip}{0pt}
+  	\begin{tabularx}{\textwidth}{@{\extracolsep{\fill}} L{2cm} L{\textwidth - 2cm}}
+		\entrydatestyle{#2} & \entrytitlestyle{#1}\\
+      	& \descriptionstyle{#3}
+  	\end{tabularx}
+}
+
 % Define a research experience entry of cv information
 % Usage: \cvexpentry{<institute>}{<position>}{<subject>}{<date>}{<description>}{<website>}{<show description>}
 \newcommand*{\cvexpentry}[7]{%
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   \begin{tabularx}{\textwidth}{@{\extracolsep{\fill}} L{2cm} L{\textwidth - 2cm}}
-      \entrydatestyle{#4} & \entrytitlestyle{#1} \entrypositionstyle{| #2} \\
+      \entrydatestyle{#4} & \entrytitlestyle{#1} \descriptionstyle{-- #2} \\
       \ifempty{#3}{}{& \entrysubtitlestyle{#3}\\}
       \ifthenelse{\equal{#7}{true}}{& \descriptionstyle{#5} \ifempty{#6}{}{\\}}{}
       \ifempty{#6}{}{& \headersocialstyle{\href{#6}{\faExternalLink\acvHeaderIconSep #6}}}
@@ -731,14 +794,8 @@
 % Define a publication entry of cv information
 % Usage: \cvpublicationentry{<publisher>}{<title>}{<authors>}{<detail of publisher>}{<date>}{<link>}{<extra info>}
 \newcommand*{\cvpubentry}[7]{%
-  \setlength\tabcolsep{0pt}
-  \setlength{\extrarowheight}{0pt}
-  \begin{tabularx}{\textwidth}{L{2cm} L{\textwidth - 2cm}}
-  	\entrydatestyle{#5} & \entrysubtitlestyle{#2} \\
-	& \descriptionstyle{#3} \\
-	& \italicdescriptionstyle{#1. \ifempty{#4}{}{#4.} \ifempty{#7}{}{#7}} \ifempty{#6}{}{\\
-	& \headersocialstyle{\href{#6}{\faExternalLink\acvHeaderIconSep #6}}}
-  \end{tabularx}
+  %\flushleft
+  \descriptionstyle{#3}. \entrysubtitlestyle{``#2''}. \italicdescriptionstyle{In: #1}. \entrydatestyle{(#5)}. \ifthenelse{\isempty{#6}}{}{\headersocialstyle{\href{#6}{\faExternalLink\acvHeaderIconSep #6}}}
 }
 
 % Define a grant entry of cv information
@@ -809,7 +866,7 @@
 }{%
     \endtabularx
     
-    \vspace{2mm}
+    %\vspace{2mm}
 }
 % Define a line of cv information(skill)
 % Usage: \cvskill{<type>}{<skillset>}
@@ -822,7 +879,7 @@
   \vspace{-4.0mm}
   \begin{justify}
   \begin{itemize}[leftmargin=2ex, nosep, noitemsep]
-    \setlength{\parskip}{0pt}
+    \setlength{\parskip}{4pt}
     \renewcommand{\labelitemi}{\bullet}
 }{%
   \end{itemize}
