@@ -887,6 +887,17 @@
   \vspace{-4.0mm}
 }
 
+% Define an environment for cvnumlist(for cventry)
+\newenvironment{cvnumlist}{%
+  \begin{justify}
+  \begin{enumerate}[leftmargin=3ex, font=\descriptionstyle]
+    \setlength{\parskip}{6pt}
+    \baselineskip=0.75\baselineskip
+}{%
+  \end{enumerate}
+  \end{justify}
+}
+
 %% Define an environment for cvprojitem(for cventry)
 %\newenvironment{cvprojitem}{%
 %  \vspace{-4.0mm}
