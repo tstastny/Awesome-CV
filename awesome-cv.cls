@@ -598,7 +598,7 @@
   \vspace{\acvSectionTopSkip}
   \sectionstyle{#1}
   \phantomsection
-  \color{gray}\vhrulefill{0.9pt}
+  \color{gray}\vhrulefill{0.9pt}\descriptionstyle{\textcolor{lightgray}{\scriptsize\hyperlink{page.1}{(to top)}}}
 }
 
 % Define a section for CV
@@ -770,15 +770,23 @@
 
 % Define an invited talk entry of cv information
 % Usage: \cvtalkentry{<venue>}{<session>}{<title>}{<presenters>}{<location>}{<date>}{<link>}
+%\newcommand*{\cvtalkentry}[7]{%
+%  \setlength\tabcolsep{0pt}
+%  \setlength{\extrarowheight}{0pt}
+%  \begin{tabularx}{\textwidth}{@{\extracolsep{\fill}} L{2cm} L{\textwidth - 2cm}}
+%	\entrydatestyle{#6} & \entrysubtitlestyle{#3} \\
+%	& \descriptionstyle{#4} \\
+%	\ifempty{#2}{}{& \descriptionstyle{#2} \\}
+%	& \italicdescriptionstyle{#1. \ifempty{#5}{}{#5.}} \\
+%	\ifempty{#7}{}{& \headersocialstyle{\href{#7}{\faExternalLink\acvHeaderIconSep #7}}}
+%  \end{tabularx}
+%}
 \newcommand*{\cvtalkentry}[7]{%
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
-  \begin{tabularx}{\textwidth}{@{\extracolsep{\fill}} L{2cm} L{\textwidth - 2cm}}
-	\entrydatestyle{#6} & \entrysubtitlestyle{#3} \\
-	& \descriptionstyle{#4} \\
-	\ifempty{#2}{}{& \descriptionstyle{#2} \\}
-	& \italicdescriptionstyle{#1. \ifempty{#5}{}{#5.}} \\
-	\ifempty{#7}{}{& \headersocialstyle{\href{#7}{\faExternalLink\acvHeaderIconSep #7}}}
+  \begin{tabularx}{\textwidth}{L{2cm} L{\textwidth - 2cm}}
+  	\entrydatestyle{#6} & \entrysubtitlestyle{#3} \\
+	& \descriptionstyle{#4.} \ifempty{#2}{}{\descriptionstyle{#2.}} \italicdescriptionstyle{#1.} \descriptionstyle{#5.} \ifempty{#7}{}{\headersocialstyle{\href{#7}{\faExternalLink\acvHeaderIconSep #7}}}
   \end{tabularx}
 }
 
@@ -795,7 +803,7 @@
 % Usage: \cvpublicationentry{<publisher>}{<title>}{<authors>}{<detail of publisher>}{<date>}{<link>}{<extra info>}
 \newcommand*{\cvpubentry}[7]{%
   %\flushleft
-  \descriptionstyle{#3}. \entrysubtitlestyle{``#2''}. \italicdescriptionstyle{In: #1}. \entrydatestyle{(#5)}. \ifthenelse{\isempty{#6}}{}{\headersocialstyle{\href{#6}{\faExternalLink\acvHeaderIconSep #6}}}
+  \descriptionstyle{#3.} \entrysubtitlestyle{``#2''}\descriptionstyle{.} \italicdescriptionstyle{#1}\descriptionstyle{.} \ifempty{#5}{}{\entrydatestyle{#5}\descriptionstyle{.}} \ifthenelse{\isempty{#6}}{}{\headersocialstyle{\href{#6}{\faExternalLink\acvHeaderIconSep #6}}}
 }
 
 % Define a grant entry of cv information
@@ -892,7 +900,7 @@
   \begin{justify}
   \begin{enumerate}[leftmargin=3ex, font=\descriptionstyle]
     \setlength{\parskip}{6pt}
-    \baselineskip=0.75\baselineskip
+    \baselineskip=0.92\baselineskip
 }{%
   \end{enumerate}
   \end{justify}
