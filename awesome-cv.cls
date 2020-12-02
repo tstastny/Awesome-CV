@@ -553,7 +553,7 @@
     			\ifthenelse{\isundefined{\@addresslinetwo}}{}{\headeraddressstyle{\@addresslinetwo\\[\acvHeaderAfterAddressSkip]}}%
     			\ifthenelse{\isundefined{\@addresslinethree}}{}{\headeraddressstyle{\@addresslinethree\\[\acvHeaderAfterAddressSkip]}}%
     			\headersocialstyle{%
-    				\href{mailto:\@email}{\faEnvelope\acvHeaderIconSep\@email}\acvHeaderSocialSep\faMobile\acvHeaderIconSep\@mobile\acvHeaderSocialSep\faGlobe\acvHeaderIconSep\@citizen\acvHeaderSocialSep\href{http://\@homepage}{\faHome\acvHeaderIconSep\@homepage}\\%
+    				\href{mailto:\@email}{\faEnvelope\acvHeaderIconSep\@email}\acvHeaderSocialSep\faMobile\acvHeaderIconSep\@mobile\ifthenelse{\isundefined{\@citizen}}{}{\acvHeaderSocialSep\faGlobe\acvHeaderIconSep\@citizen}\acvHeaderSocialSep\href{http://\@homepage}{\faHome\acvHeaderIconSep\@homepage}\\%
         			}%
     			\ifthenelse{\isundefined{\@dob}}{}{\headeraddressstyle{Date of Birth: \@dob\\}}
   		\end{minipage} \hfill \setlength{\fboxsep}{3pt}\setlength{\fboxrule}{0.9pt}\fcolorbox{gray}{white}{\includegraphics[trim={0 5cm 0 5cm},clip,width=0.165\textwidth,valign=t]{BioPhoto_ThomasStastny_smaller2_grayscale.png}}
@@ -563,7 +563,7 @@
   			\headerfirstnamestyle{\@firstname}\headerlastnamestyle{{}\acvHeaderNameDelim\@lastname}\ifthenelse{\isundefined{\@suffix}}{}{\headerlastnamestyle{,{}\acvHeaderNameDelim\@suffix}}\\[3pt]%
 			\ifthenelse{\isundefined{\@position}}{}{\headerpositionlowercasestyle{\@position\\[\acvHeaderAfterPositionSkip]}}
 			\ifthenelse{\isundefined{\@addresslineone}}{}{\headeraddressstyle{\@addresslineone, }}\ifthenelse{\isundefined{\@addresslinetwo}}{}{\headeraddressstyle{\@addresslinetwo, }}\ifthenelse{\isundefined{\@addresslinethree}}{}{\headeraddressstyle{\@addresslinethree\\[\acvHeaderAfterAddressSkip]}}%
-    			\headersocialstyle{\href{mailto:\@email}{\faEnvelope\acvHeaderIconSep\@email}\acvHeaderSocialSep\faMobile\acvHeaderIconSep\@mobile\acvHeaderSocialSep\faGlobe\acvHeaderIconSep\@citizen\acvHeaderSocialSep\href{http://\@homepage}{\faHome\acvHeaderIconSep\@homepage}\\}%
+    			\headersocialstyle{\href{mailto:\@email}{\faEnvelope\acvHeaderIconSep\@email}\acvHeaderSocialSep\faMobile\acvHeaderIconSep\@mobile\ifthenelse{\isundefined{\@citizen}}{}{\acvHeaderSocialSep\faGlobe\acvHeaderIconSep\@citizen}\acvHeaderSocialSep\href{http://\@homepage}{\faHome\acvHeaderIconSep\@homepage}\\}%
     		\end{center}
     	\fi
 }
