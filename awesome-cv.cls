@@ -554,7 +554,7 @@
     			\ifthenelse{\isundefined{\@addresslinetwo}}{}{\headeraddressstyle{\@addresslinetwo\\[\acvHeaderAfterAddressSkip]}}%
     			\ifthenelse{\isundefined{\@addresslinethree}}{}{\headeraddressstyle{\@addresslinethree\\[\acvHeaderAfterAddressSkip]}}%
     			\headersocialstyle{%
-    				\href{mailto:\@email}{\faEnvelope\acvHeaderIconSep\@email}\acvHeaderSocialSep\faMobile\acvHeaderIconSep\@mobile\acvHeaderSocialSep\faGlobe\acvHeaderIconSep\@citizen\acvHeaderSocialSep\href{http://\@homepage}{\faHome\acvHeaderIconSep\@homepage}\\%
+    				\href{mailto:\@email}{\faEnvelope\acvHeaderIconSep\@email}\acvHeaderSocialSep\faMobile\acvHeaderIconSep\@mobile\acvHeaderSocialSep\href{http://\@homepage}{\faHome\acvHeaderIconSep\@homepage}\\%
         			}%
     			\ifthenelse{\isundefined{\@dob}}{}{\headeraddressstyle{Date of Birth: \@dob\\}}
   		\end{minipage} \hfill \setlength{\fboxsep}{3pt}\setlength{\fboxrule}{0.9pt}\fcolorbox{gray}{white}{\includegraphics[trim={0 5cm 0 5cm},clip,width=0.165\textwidth,valign=t]{BioPhoto_ThomasStastny_smaller2_grayscale.png}}
@@ -564,7 +564,7 @@
   			\headerfirstnamestyle{\@firstname}\headerlastnamestyle{{}\acvHeaderNameDelim\@lastname}\ifthenelse{\isundefined{\@suffix}}{}{\headerlastnamestyle{,{}\acvHeaderNameDelim\@suffix}}\\[3pt]%
 			\ifthenelse{\isundefined{\@position}}{}{\headerpositionlowercasestyle{\@position\\[\acvHeaderAfterPositionSkip]}}
 			\ifthenelse{\isundefined{\@addresslineone}}{}{\headeraddressstyle{\@addresslineone, }}\ifthenelse{\isundefined{\@addresslinetwo}}{}{\headeraddressstyle{\@addresslinetwo, }}\ifthenelse{\isundefined{\@addresslinethree}}{}{\headeraddressstyle{\@addresslinethree\\[\acvHeaderAfterAddressSkip]}}%
-    			\headersocialstyle{\href{mailto:\@email}{\faEnvelope\acvHeaderIconSep\@email}\acvHeaderSocialSep\faMobile\acvHeaderIconSep\@mobile\acvHeaderSocialSep\faGlobe\acvHeaderIconSep\@citizen\acvHeaderSocialSep\href{http://\@homepage}{\faHome\acvHeaderIconSep\@homepage}\\}%
+    			\headersocialstyle{\href{mailto:\@email}{\faEnvelope\acvHeaderIconSep\@email}\acvHeaderSocialSep\faMobile\acvHeaderIconSep\@mobile\acvHeaderSocialSep\href{http://\@homepage}{\faHome\acvHeaderIconSep\@homepage}\\}%
     		\end{center}
     	\fi
 }
@@ -595,18 +595,18 @@
 
 % Define a section for CV
 % Usage: \cvsection{<section-title>}
-\newcommand{\cvsection}[1]{%
+\newcommand{\cvsection}[2]{%
   \vspace{\acvSectionTopSkip}
-  \sectionstyle{#1}
+  \ifthenelse{\isempty{#2}}{}{{\fontsize{16pt}{1em}\bodyfont\color{awesome} #2\acvHeaderIconSep}}\sectionstyle{#1}
   \phantomsection
   \color{gray}\vhrulefill{0.9pt}\descriptionstyle{\textcolor{lightgray}{\scriptsize\hyperlink{page.1}{(to top)}}}
 }
 
 % Define a section for CV
 % Usage: \cvsection{<section-title>}
-\newcommand{\cvsectionalt}[2]{%
+\newcommand{\cvsectionalt}[3]{%
   \vspace{\acvSectionTopSkip}
-  \sectionstylenocolor{#2} \sectionstyle{#1}
+  \ifthenelse{\isempty{#3}}{}{{\fontsize{16pt}{1em}\bodyfont\color{awesome} #3\acvHeaderIconSep}}\sectionstylenocolor{#2} \sectionstyle{#1}
   \phantomsection
   \color{gray}\vhrulefill{0.9pt}
 }
