@@ -71,7 +71,7 @@
 % To support LaTeX quoting style
 \defaultfontfeatures{Ligatures=TeX}
 % Needed to manage math fonts
-\RequirePackage[math-style=TeX,vargreek-shape=unicode]{unicode-math}
+\RequirePackage{unicode-math}
 % Needed to use icons from font-awesome
 % (https://github.com/posquit0/latex-fontawesome)
 \RequirePackage{fontawesome}
@@ -242,6 +242,7 @@
 \newcommand*{\entrydatestyle}[1]{{\fontsize{8pt}{1em}\bodyfontlight\color{graytext} #1}}
 \newcommand*{\entrylocationstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
 \newcommand*{\descriptionstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\upshape\color{text} #1}}
+\newcommand*{\descriptionawesomestyle}[1]{{\fontsize{8pt}{1em}\headerfont\color{awesome} #1}}
 \newcommand*{\italicdescriptionstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{text} #1}}
 \newcommand*{\highlightdescriptionstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\upshape\color{awesome} #1}}
 \newcommand*{\emphdescriptionstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\upshape\bfseries\color{graytext} #1}}
@@ -598,7 +599,7 @@
   \vspace{\acvSectionTopSkip}
   \sectionstyle{#1}
   \phantomsection
-  \color{gray}\vhrulefill{0.9pt}
+  \color{gray}\vhrulefill{0.9pt}\descriptionstyle{\textcolor{lightgray}{\scriptsize\hyperlink{page.1}{(to top)}}}
 }
 
 % Define a section for CV
