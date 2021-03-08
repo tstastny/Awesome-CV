@@ -812,8 +812,8 @@
   \setlength{\extrarowheight}{0pt}
   \begin{tabularx}{\textwidth}{L{2cm} L{\textwidth - 2cm}}
   	\entrydatestyle{#4} & \entrysubtitlestyle{#2} \\
-	& \ifthenelse{\equal{#3}{PI}}{\descriptionstyle{\textbf{PI: #6}.}}{\descriptionstyle{Role: \textbf{#3}. PI: #6.}} \italicdescriptionstyle{#1.} \descriptionstyle{\textbf{#5}}\\
-  \end{tabularx}
+	& \ifthenelse{\equal{#3}{PI}}{\descriptionstyle{\textbf{PI: #6}.}}{\descriptionstyle{Role: \textbf{#3}. PI: #6.}} \italicdescriptionstyle{#1.} \descriptionstyle{\textbf{#5}}
+  \end{tabularx}\vspace{4pt}
 }
 
 % Define an environment for cvsubentry
