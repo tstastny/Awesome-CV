@@ -760,11 +760,10 @@
 \newcommand*{\cvexpentry}[7]{%
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
-  \begin{tabularx}{\textwidth}{@{\extracolsep{\fill}} L{2cm} L{\textwidth - 2cm}}
+  \begin{tabularx}{\textwidth}{L{2cm} L{\textwidth - 2cm}}
       \entrydatestyle{#4} & \entrytitlestyle{#1} \descriptionstyle{-- #2} \\
-      \ifempty{#3}{}{& \entrysubtitlestyle{#3}\\}
-      \ifthenelse{\equal{#7}{true}}{& \descriptionstyle{#5} \ifempty{#6}{}{\\}}{}
-      \ifempty{#6}{}{& \headersocialstyle{\href{#6}{\faExternalLink\acvHeaderIconSep #6}}}
+      & \descriptionstyle{#5}
+%      \multicolumn{2}{p{\hsize}}{\vspace{6pt} \descriptionstyle{#5}}
   \end{tabularx}
 }
 
