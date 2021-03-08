@@ -786,7 +786,7 @@
   \begin{tabularx}{\textwidth}{L{2cm} L{\textwidth - 2cm}}
   	\entrydatestyle{#6} & \entrysubtitlestyle{#3} \\
 	& \descriptionstyle{#4.} \ifempty{#2}{}{\descriptionstyle{#2.}} \italicdescriptionstyle{#1.} \descriptionstyle{#5.} \ifempty{#7}{}{\headersocialstyle{\href{#7}{\faExternalLink\acvHeaderIconSep #7}}}
-  \end{tabularx}
+  \end{tabularx}\vspace{4pt}
 }
 
 \newcommand*{\cvawardentry}[3]{%
