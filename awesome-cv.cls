@@ -564,7 +564,7 @@
   			\headerfirstnamestyle{\@firstname}\headerlastnamestyle{{}\acvHeaderNameDelim\@lastname}\ifthenelse{\isundefined{\@suffix}}{}{\headerlastnamestyle{,{}\acvHeaderNameDelim\@suffix}}\\[3pt]%
 			\ifthenelse{\isundefined{\@position}}{}{\headerpositionlowercasestyle{\@position\\[\acvHeaderAfterPositionSkip]}}
 			\ifthenelse{\isundefined{\@addresslineone}}{}{\headeraddressstyle{\@addresslineone, }}\ifthenelse{\isundefined{\@addresslinetwo}}{}{\headeraddressstyle{\@addresslinetwo, }}\ifthenelse{\isundefined{\@addresslinethree}}{}{\headeraddressstyle{\@addresslinethree\\[\acvHeaderAfterAddressSkip]}}%
-    			\headersocialstyle{\href{mailto:\@email}{\faEnvelope\acvHeaderIconSep\@email}\acvHeaderSocialSep\faMobile\acvHeaderIconSep\@mobile\acvHeaderSocialSep\href{http://\@homepage}{\faHome\acvHeaderIconSep\@homepage}\\}%
+    			\headersocialstyle{\href{mailto:\@email}{\faEnvelope\acvHeaderIconSep\@email}\acvHeaderSocialSep\faMobile\acvHeaderIconSep\@mobile\ifthenelse{\isundefined{\@citizen}}{}{\acvHeaderSocialSep\faGlobe\acvHeaderIconSep\@citizen}\acvHeaderSocialSep\href{http://\@homepage}{\faHome\acvHeaderIconSep\@homepage}\\}%
     		\end{center}
     	\fi
 }
