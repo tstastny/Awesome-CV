@@ -608,7 +608,7 @@
   \vspace{\acvSectionTopSkip}
   \ifthenelse{\isempty{#3}}{}{{\fontsize{16pt}{1em}\bodyfont\color{awesome} #3\acvHeaderIconSep}}\sectionstylenocolor{#2} \sectionstyle{#1}
   \phantomsection
-  \color{gray}\vhrulefill{0.9pt}
+  \color{gray}\vhrulefill{0.9pt}\descriptionstyle{\textcolor{lightgray}{\scriptsize\hyperlink{page.1}{(to top)}}}
 }
 
 % Define a subsection for CV
